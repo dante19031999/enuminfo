@@ -9,4 +9,4 @@ default = ["from-str", "into-iter"]
 "into-iter" = []
 
 [dependencies]
-enuminfo_macros = { git = "https://github.com/dante19031999/enuminfo-macros" }
+enuminfo_macros = { git = "https://github.com/dante19031999/enuminfo-macros" , features = ["impl-enuminfo"]}
