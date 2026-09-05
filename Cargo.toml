@@ -5,8 +5,8 @@ edition = "2024"
 
 [features]
 default = ["from-str", "into-iter"]
-"from-str" = []
-"into-iter" = []
+"from-str" = ["enuminfo_macros/from-str"]
+"into-iter" = ["enuminfo_macros/into-iter"]
 
 [dependencies]
 enuminfo_macros = { git = "https://github.com/dante19031999/enuminfo-macros" , features = ["impl-enuminfo"]}
