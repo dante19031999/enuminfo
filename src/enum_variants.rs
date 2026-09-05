@@ -1,7 +1,14 @@
+use std::vec::IntoIter;
+
 pub trait EnumVariants {
-    fn variants(&self) -> &'static [Self]
+    fn variants() -> &'static [Self]
     where
         Self: Sized;
 
-    fn variant_count(&self) -> usize;
+    fn variant_count() -> usize
+    where
+        Self: Sized,
+    {
+        Self::variants().len()
+    }
 }
