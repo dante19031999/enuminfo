@@ -12,10 +12,10 @@ pub use enuminfo_macros::EnumVariants;
 
 pub use enum_is::EnumIs;
 pub use enum_name::EnumName;
-pub use enum_from_name::FromEnumName;
+pub use enum_from_name::EnumFromName;
 pub use enum_variants::EnumVariants;
 pub use enum_class::EnumClass;
 
 pub mod error{
-    pub use crate::enum_name::EnumFromNameError;
+    pub use crate::enum_from_name::EnumFromNameError;
 }

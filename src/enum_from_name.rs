@@ -13,7 +13,7 @@ impl std::fmt::Display for FromEnumNameError {
 
 impl std::error::Error for FromEnumNameError {}
 
-pub trait FromEnumName : EnumClass {
+pub trait EnumFromName: EnumClass {
     fn from_name(name: &str) -> Option<Self>
     where
         Self: Sized;
@@ -40,7 +40,11 @@ impl EnumFromNameError {
 
 impl std::fmt::Display for EnumFromNameError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Invalid enum name \"{}\" for enum `{}`", self.name, self.enum)
+        write!(
+            f,
+            "Invalid enum name \"{}\" for enum `{}`",
+            &self.enum_name, &self.enum_class
+        )
     }
 }
 
