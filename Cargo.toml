@@ -1,0 +1,12 @@
+[package]
+name = "enuminfo"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+default = ["from-str", "into-iter"]
+"from-str" = []
+"into-iter" = []
+
+[dependencies]
+enuminfo_macros = { git = "https://github.com/dante19031999/enuminfo-macros" }
