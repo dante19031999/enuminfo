@@ -24,4 +24,4 @@ default = ["from-str"]
 "skip-inherent" = ["enuminfo_macros/skip-inherent"]
 
 [dependencies]
-enuminfo_macros = { version = "0.3.0", features = ["impl-enuminfo"] }
+enuminfo_macros = { version = "0.3.1", features = ["impl-enuminfo"] }
