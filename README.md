@@ -4,6 +4,10 @@
 
 A comprehensive collection of procedural derive macros and traits for Rust `enum` types providing boolean checkers, string conversions, name lookup constructors, variant slices and counting, casing transformations, and dynamic property queries compatible with `serde`.
 
+[![Crates.io](https://img.shields.io/crates/v/enuminfo_macros.svg)](https://crates.io/crates/enuminfo)
+[![Documentation](https://docs.rs/enuminfo_macros/badge.svg)](https://docs.rs/enuminfo)
+[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)]()
+
 ---
 
 ## Features
