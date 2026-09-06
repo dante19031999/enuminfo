@@ -1,6 +1,6 @@
 [package]
 name = "enuminfo"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 authors = ["Dante Doménech <dante19031999@gmail.com>"]
 description = "Procedural derive macros and traits for Rust enums providing boolean checkers, string conversions, name lookup, variant slices, and casing transformations"
