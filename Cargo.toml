@@ -4,9 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [features]
-default = ["from-str", "into-iter"]
+default = ["from-str"]
 "from-str" = ["enuminfo_macros/from-str"]
-"into-iter" = ["enuminfo_macros/into-iter"]
 "skip-inherent" = ["enuminfo_macros/skip-inherent"]
 
 [dependencies]
