@@ -1,5 +1,3 @@
-use crate::EnumClass;
-
 #[derive(Debug, Clone)]
 pub struct FromEnumNameError {
     name: String,
@@ -13,7 +11,7 @@ impl std::fmt::Display for FromEnumNameError {
 
 impl std::error::Error for FromEnumNameError {}
 
-pub trait EnumFromName: EnumClass {
+pub trait EnumFromName {
     fn from_name(name: &str) -> Option<Self>
     where
         Self: Sized;
