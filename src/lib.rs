@@ -154,7 +154,7 @@
 //!     South,
 //!     East,
 //!     West,
-//!     #[enuminfo(ignore_variants)]
+//!     #[enuminfo(ignore_variant)]
 //!     Unknown,
 //! }
 //!
