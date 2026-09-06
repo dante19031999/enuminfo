@@ -3,6 +3,7 @@ macro_rules! get_x_property {
     ($( ($fn_name:ident, $type:ty) ),* $(,)?) => {
         $(
             fn $fn_name(&self, key: &str) -> Option<$type> {
+                let _ = key;
                 None
             }
         )*
