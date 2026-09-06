@@ -1,5 +1,3 @@
-use std::vec::IntoIter;
-
 pub trait EnumVariants {
     fn variants() -> &'static [Self]
     where

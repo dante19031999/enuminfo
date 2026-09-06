@@ -15,6 +15,7 @@ pub use enum_name::EnumName;
 pub use enum_from_name::EnumFromName;
 pub use enum_variants::EnumVariants;
 pub use enum_class::EnumClass;
+pub use enum_property::EnumProperty;
 
 pub mod error{
     pub use crate::enum_from_name::EnumFromNameError;

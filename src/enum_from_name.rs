@@ -1,7 +1,7 @@
 use crate::EnumClass;
 
 #[derive(Debug, Clone)]
-struct FromEnumNameError {
+pub struct FromEnumNameError {
     name: String,
 }
 
