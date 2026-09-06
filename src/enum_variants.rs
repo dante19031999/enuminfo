@@ -7,8 +7,5 @@ pub trait EnumVariants {
 
     fn variant_count() -> usize
     where
-        Self: Sized,
-    {
-        Self::variants().len()
-    }
+        Self: Sized;
 }
