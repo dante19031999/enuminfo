@@ -1,0 +1,111 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  packages: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # ------------------------------------------------------------------
+  # PHASE 1: BUILD
+  # ------------------------------------------------------------------
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/dante19031999/rust-ci-tools:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: cargo build --verbose
+
+      - name: Save Workspace
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace
+          path: .
+
+  # ------------------------------------------------------------------
+  # PHASE 2: TEST & AUDIT
+  # ------------------------------------------------------------------
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/dante19031999/rust-ci-tools:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Download Workspace
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace
+
+      - name: Run tests
+        run: cargo test
+
+      - name: Cargo Deny Check
+        run: cargo deny check
+
+      - name: Cargo Security Audit
+        run: cargo audit
+
+  # ------------------------------------------------------------------
+  # PHASE 3: RELEASE & PAGES
+  # ------------------------------------------------------------------
+  release:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/dante19031999/rust-ci-tools:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download Workspace
+        uses: actions/download-artifact@v4
+        with:
+          name: workspace
+
+      - name: Build Documentation
+        run: cargo doc
+
+      - name: Acknowledgements
+        run: cargo about generate about.hbs > target/doc/ACKNOWLEDGEMENTS.html
+
+      - name: Setup home
+        run: echo '<meta http-equiv="refresh" content="0; url=enuminfo/index.html">' > target/doc/index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'target/doc'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
